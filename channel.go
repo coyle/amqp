@@ -197,6 +197,9 @@ func (ch *Channel) call(req message, res ...message) error {
 			// error on the Connection.  This indicates we have already been
 			// shutdown and if were waiting, will have returned from the errors chan.
 			return ErrClosed
+
+		case <-time.After(ch.connection.Config.Heartbeat):
+			return Err
 		}
 	}
 
