@@ -9,6 +9,7 @@ import (
 	"reflect"
 	"sync"
 	"sync/atomic"
+	"time"
 )
 
 // 0      1         3             7                  size+7 size+8
@@ -199,7 +200,7 @@ func (ch *Channel) call(req message, res ...message) error {
 			return ErrClosed
 
 		case <-time.After(ch.connection.Config.Heartbeat):
-			return Err
+			return ErrChannelOperationTimeout
 		}
 	}
 

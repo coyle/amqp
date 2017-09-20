@@ -59,6 +59,10 @@ var (
 
 	// ErrFieldType is returned when writing a message containing a Go type unsupported by AMQP.
 	ErrFieldType = &Error{Code: SyntaxError, Reason: "unsupported table field type"}
+
+	// ErrChannelOperationTimeout is returned when a request/response call has not returned
+	// before a specified timeout of the heartbeat.
+	ErrChannelOperationTimeout = &Error{Code: ChannelError, Reason: "channel operation time out"}
 )
 
 // Error captures the code and reason a channel or connection has been closed
